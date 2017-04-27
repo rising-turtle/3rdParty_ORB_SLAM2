@@ -190,6 +190,7 @@ void Frame::maskFilter(cv::Mat mask)
   } 
 
   // resize 
+  keys.resize(index); 
   mvKeys.swap(keys); 
   mDescriptors = des.rowRange(0, index); 
   N = index; 
@@ -223,6 +224,8 @@ Frame::Frame(const cv::Mat &imGray, const cv::Mat &imDepth, const double &timeSt
 
     // filter features based on the given mask 
     maskFilter(mask); 
+    if(mvKeys.empty())
+      return; 
 
     UndistortKeyPoints();
 
